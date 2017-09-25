@@ -1,0 +1,147 @@
+<!DOCType html>
+<head>
+    <style>
+        #banner {
+            width: 200px;
+            height: 100px;
+            text-align: center;
+            position: absolute;
+            background: red;
+            font-size: 20px;
+            visibility: hidden;
+        }
+        .man{
+            visibility: hidden;
+        }
+        .hanger {
+            margin-left: 200px;
+            display: block;
+            width: 400px;
+        }
+        .footer {
+            width: 300px;
+            border-bottom: solid 20px black;
+        }
+        .middle {
+            width: 20px;
+            border-left: solid 20px black;
+            margin-left: 50px;
+            height: 400px;
+            position: relative;
+            display: block;
+        }
+        .top {
+            width: 150px;
+            border-bottom: solid 20px black;
+            margin-left: 50px;
+            position: relative;
+        }
+        .rope {
+            width: 20px;
+            height: 50px;
+            margin-right: 180px;
+            position: relative;
+            border-left: solid 5px black;
+            float:right;
+        }
+        .face {
+            width: 50px;
+            height: 50px;
+            margin-right: 170px;
+            position: relative;
+            border: solid 10px black;
+            border-radius: 50px;
+            float:right;
+        }
+        .torso {
+            width: 10px;
+            height: 170px;
+            margin-right: 200px;
+            position: relative;
+            border-right: solid 10px black;
+            float:right;
+        }
+        .left-arm {
+            width: 50px;
+            height: 50px;
+            margin-top: 30px;
+            margin-right: -10px;
+            border-top: solid 5px black;
+            border-left: solid 5px black;
+            border-top-left-radius: 50px;
+            float:right;
+        }
+        .right-arm {
+            width: 50px;
+            height: 50px;
+            margin-top: 30px;
+            margin-right: -116px;
+            border-top: solid 5px black;
+            border-right: solid 5px black;
+            border-top-right-radius: 50px;
+            float:right;
+        }
+        .legs {
+            width: 50px;
+            height: 50px;
+            margin-right: 170px;
+            position: relative;
+            border-left: solid 10px black;
+            border-right: solid 10px black;
+            border-top: solid 5px black;
+            border-radius: 50px;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+            float:right;
+        }
+        #alphabet {
+            margin: 30px auto 0;
+        }
+
+        #alphabet div {
+            padding: 6px;
+            font-size: 15px;
+            display: inline;
+            cursor: pointer;
+        }
+
+        #result {
+            margin: auto;
+            text-align: center;
+        }
+        #result div{
+            margin: 4px;
+/*            margin-top: 10px;*/
+            padding: 4px;
+            font-size: 20px;
+            width: 30px;
+            height: 30px;
+            background: light-grey;
+            display: inline-block;
+            cursor: pointer;
+            border-bottom: solid black 3px;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div id="banner"></div>
+    <div class="hanger">
+        <div class="top"></div>
+        <div class="man">
+            <div class="rope"></div>
+            <div class="face"></div>
+            <div class="torso"></div>
+            <div class="left-arm"></div>
+            <div class="right-arm"></div>
+            <div class="legs"></div>
+        </div>
+        <div class="middle"></div>
+        <div class="footer"></div>
+        <div class="man"></div>
+    </div>
+    <div id='alphabet'></div>
+    <div id='result'></div>
+    <script src='hangman.js'></script>
+</body>
