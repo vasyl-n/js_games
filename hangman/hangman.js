@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function(){
     var letters = 'ABCDEFGHIJKLMNOPRSTUVWXYZ';
     letters.split("")
     
-    var wordsList = ['hangman', 'headphones', 'hamburger', 'tuna', 'sandwich', 'oranges', 'wolf']
+    var wordsList = ['hangman', 'headphones', 'hamburger', 'tuna', 'sandwich', 'orange', 'toyota', 'ginger']
     
     var banner = document.getElementById("banner")
     
@@ -37,9 +37,9 @@ document.addEventListener("DOMContentLoaded", function(){
                 indexesOfClickedLetter.push(i)
             }
         }
-        console.log(indexesOfClickedLetter)
         if(indexesOfClickedLetter.length === 0){
             hangingStage -= 1;
+            event.target.style.background = "grey"
         } else {
             lettersGuessedCount += 1;
             for(var i = 0; i < indexesOfClickedLetter.length; i++){
@@ -47,14 +47,11 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         }
         
-        console.log(hangingStage)
         if(hangingStage === 0){
-            console.log("Looser")
             banner.innerHTML = "LOOOSER!"
             banner.style.visibility = "visible";
         }
         else if(lettersGuessedCount === uniqueLettersCount){
-            console.log("congratulations")
             banner.innerHTML = "Congratulations"
             banner.style.visibility = "visible";
         }
