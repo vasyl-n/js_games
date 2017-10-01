@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var container = document.getElementById('container');
     
     var bombs = [];
-    while(bombs.length < gridSize *1.5){
+    while(bombs.length < gridSize ** 1.3){
         var rand = Math.ceil(Math.random() * (gridSize **2))
         if(bombs.indexOf(rand) < 0){
         bombs.push(rand)
@@ -158,15 +158,15 @@ document.addEventListener('DOMContentLoaded', function(){
     
     function isInFirstCol(id){
         var ar = [];
-        for( i = 0; i < gridSize**2; i+=gridSize){
-            ar.push(i+1)
+        for(var i = 1; i < gridSize**2; i+=gridSize){
+            ar.push(i)
         } return ar.includes(id)
     }
     
     function isInLastCol(id){
         var ar = [];
-        for( i = gridSize-1; i <= gridSize**2; i+=gridSize){
-            ar.push(i+1)
+        for(var i = gridSize; i <= gridSize**2; i+=gridSize){
+            ar.push(i)
         } return ar.includes(id)
     }
     
@@ -191,11 +191,11 @@ document.addEventListener('DOMContentLoaded', function(){
         if(!isInLastCol(id)){arr.push(id+1)}
         if(!isInFirstCol(id)){arr.push(id-1)}
         if(id > gridSize){arr.push(id-gridSize)}
-        if(id < gridSize*gridSize-gridSize){arr.push(id+gridSize)}
+        if(id <= gridSize*gridSize-gridSize){arr.push(id+gridSize)}
         if(!isInLastCol(id) && id < gridSize*gridSize-gridSize){arr.push(id+gridSize + 1)}
         if(!isInLastCol(id) && id > gridSize){arr.push(id - gridSize + 1)}
         if(!isInFirstCol(id) && id > gridSize){arr.push(id - gridSize - 1)}
-        if(!isInFirstCol(id) && id < gridSize*gridSize-gridSize){arr.push(id + gridSize - 1)}
+        if(!isInFirstCol(id) && id <= gridSize*gridSize-gridSize){arr.push(id + gridSize - 1)}
         return arr
     }
     
@@ -205,13 +205,11 @@ document.addEventListener('DOMContentLoaded', function(){
         openedCells.push(id)
         var zeros = getZerosAround(id);
         var allIds = getIdsAround(id);
-        console.log(allIds)
         for(var i = 0; i < allIds.length; i++){
             var bCount = bombCount(allIds[i])
             document.getElementById(allIds[i].toString()).innerHTML = bCount
         }
         for(var j = 0; j < zeros.length; j++){
-            console.log(zeros[j])
             if(!openedCells.includes(zeros[j])){
                 showOtherZeros(zeros[j]);
             }
@@ -221,6 +219,7 @@ document.addEventListener('DOMContentLoaded', function(){
     
     function game(event){
         var id = parseInt(event.target.getAttribute('id'));
+        console.log(getIdsAround(id),isInLastCol(id))
         if(isBomb(id)){
             console.log("loooser")
             for(i = 0; i < bombs.length; i++){
@@ -233,9 +232,7 @@ document.addEventListener('DOMContentLoaded', function(){
             var bCount = bombCount(id)
             event.target.innerHTML = bCount
             if(bCount === 0){
-                console.log("0 here")
                 showOtherZeros(id)
-//                console.log(getIdsAround(id))
             }
         }
     }
