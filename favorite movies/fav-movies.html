@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        h1 {
+            font-family: cursive;
+            font-size: 20;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        input {
+            margin: 8px;
+            width: 150px;
+        }
+        th, tr, td{
+            border: solid 1px black;
+            padding: 8px;
+        }
+        
+        tr:nth-child(odd) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Favorite Movies</h1>
+    <form>
+        Title:
+        <input id='title'></input>
+        Rating:
+        <input id='rating'></input>
+        <button id='add'>Add Movie</button>
+    </form>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Rating</th>
+            <th>Delete</th>
+        </tr>
+    </table>
+    
+    
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="fav-movies.js"></script>
+</body>
+</html>
