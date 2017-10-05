@@ -19,6 +19,7 @@ $(function(){
                }
         
     function resetGame(){
+        score = 0
         selectionsCount = []
         clearQuestion()
         var $selects = $("<div>")
@@ -96,9 +97,7 @@ $(function(){
     }
     
     function checkIfSelectionsCompleted(){
-        console.log(selectionsCount)
         if(selectionsCount.includes(1) && selectionsCount.includes(2) &&selectionsCount.includes(3)){
-            console.log("werwer")
             $('#start').removeAttr('disabled')
         }
     }
@@ -111,16 +110,15 @@ $(function(){
         $('#start').on('click', function(){
             $.get(urlConstructor()).then(function(resp){
                 var results = resp.results
-                console.log(results)
                 hideSelections()
                 gameStart(results);
             })
         })
     }
     
-   function hideSelections(){
-       $("#selects").remove()
-   }
+    function hideSelections(){
+        $("#selects").remove()
+    }
     
     function displayQuestionAndAnswersReturnCorrect(obj){
         if(!obj){
@@ -132,23 +130,37 @@ $(function(){
         displayScore()
         var $question = $("<div>")
         $question.attr("id", "question")
-        $question.text(obj.question)
+        console.log(obj.question, replace39s(obj.question))
+        $question.text(replace39s(obj.question))
         var $answer = $("<div>")
         $answer.attr("id", "answers")
         var $correctAnswer = $('<div>')
         $correctAnswer.attr("class", "answer")
-        $correctAnswer.text(obj.correct_answer)
-        
+        $correctAnswer.text(replace39s(obj.correct_answer))
+        var arr = [];
         for(var j = 0; j < obj.incorrect_answers.length; j++){
             var $incorrect = $("<div>");
-            
-            $incorrect.text(obj.incorrect_answers[j])
+            $incorrect.text(replace39s(obj.incorrect_answers[j]))
             $incorrect.attr("class", "answer")
-            $answer.append($incorrect)
+            arr.push($incorrect)
         }
-        $answer.append($correctAnswer)
+        arr.push($correctAnswer);
+        shuffleArray(arr).forEach(function(x){
+            $answer.append(x)
+        })
+        console.log(arr)
         $qNa.append($question).append($answer)
         return $correctAnswer.text()
+    }
+    
+    function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+        return array;
     }
     
     function clearQuestion(){
@@ -160,7 +172,7 @@ $(function(){
         function listenToAnswer(){
             correctAnswer = displayQuestionAndAnswersReturnCorrect(arr[i])
             $("#answers div").on('click', function(){
-                if(correctAnswer === $(this).text()){
+                if(replace39s(correctAnswer) === replace39s($(this).text())){
                     score += 1;
                     i += 1;
                     listenToAnswer()
@@ -180,7 +192,6 @@ $(function(){
         $qNa.append($currentScore)
     }
 
-    
     
     function gameOver(){
         clearQuestion()
@@ -205,6 +216,15 @@ $(function(){
             inputListener()
             startButtonListener()
         })
+    }
+    
+    function replace39s(str){
+        a = str.replace("&#039;", "'");
+        a = a.replace("&quot;", "'");
+        if(str === a){
+           return a
+           } else {return  replace39s(a)
+            }
     }
     
     resetGame()
