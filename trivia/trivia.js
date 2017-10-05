@@ -110,8 +110,26 @@ $(function(){
         $('#start').on('click', function(){
             $.get(urlConstructor()).then(function(resp){
                 var results = resp.results
-                hideSelections()
-                gameStart(results);
+                if(results.length !== 0){
+                    hideSelections()
+                    gameStart(results)
+                } else{
+                    difficulty = "easy"
+                    $.get(urlConstructor()).then(function(resp){
+                        results = resp.results
+                        if(results.length !== 0){
+                            hideSelections()
+                            gameStart(results)
+                        }else{
+                            type = "multiple"
+                            $.get(urlConstructor()).then(function(resp){
+                            results = resp.results
+                            hideSelections()
+                            gameStart(results)
+                        })
+                        }                                 
+                    })
+                }
             })
         })
     }
